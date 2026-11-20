@@ -74,7 +74,7 @@ function renderFooter() {
   foot.replaceChildren(
     h("p", {}, "Everything runs in your browser: the board is BingoSync's own generator, the doors are ",
       "Beta Quest's shuffle for the seed's file name, and the rest is the project's reachability model. ",
-      "Difficulty and workload are model estimates that have not been checked against timed play; ",
+      "Difficulty and workload are model estimates that may be wildly off; ",
       "a route is the fewest loading zones the model finds, not the fastest way."),
     h("p", {}, `Model ${build.profile_version || "?"} · Pyodide ${build.pyodide_version || "?"}`
       + (build.built ? ` · built ${build.built}` : ""),
@@ -133,7 +133,7 @@ async function lookUp(seed, square = null) {
   setAddress();
   input.value = String(seed);
   document.title = `Seed ${seed} · Beta Quest Seed Explorer`;
-  setStatus(`Solving seed ${seed}…`, true);
+  setStatus(`Analyzing seed ${seed}…`, true);
   form.querySelector("button[type=submit]").disabled = true;
   try {
     await buildReady;
@@ -144,7 +144,7 @@ async function lookUp(seed, square = null) {
     $("main").hidden = false;
     renderAll();
     const glitchy = Object.keys(quick.report.tier_squares).length > 0;
-    if (glitchy) setStatus("Naming the glitch behind each square that needs one…", true);
+    if (glitchy) setStatus("Working out which glitches each square needs…", true);
     else setStatus("");
     if (state.selected !== null) showSquare(state.selected);
     if (glitchy) {
@@ -178,15 +178,15 @@ function renderSummary() {
   const report = page.report;
   const share = effortShare(report.effort);
   const workload = report.effort === null
-    ? h("dd", {}, "None", h("small", {}, "no tier routes every square"))
+    ? h("dd", {}, "None", h("small", {}, "no level of glitches reaches every square"))
     : h("dd", {}, `${report.effort_band} · ${report.effort.toFixed(1)} of 100`,
       h("small", {}, share === null
-        ? "a model estimate, not minutes"
-        : `heavier than ${Math.min(share * 100, 99.9).toFixed(share < 0.01 || share > 0.99 ? 1 : 0)}% of routable seeds; a model estimate, not minutes`));
+        ? "an estimate, not a time"
+        : `more work than ${Math.min(share * 100, 99.9).toFixed(share < 0.01 || share > 0.99 ? 1 : 0)}% of seeds that can be finished; an estimate, not a time`));
   const facts = h("dl", { class: "facts" },
     h("div", {}, h("dt", {}, "Seed"), h("dd", {}, String(page.seed),
       h("small", {}, `file name ${page.filename}`))),
-    h("div", {}, h("dt", {}, "Skill floor"), h("dd", {}, report.access_tier_label)),
+    h("div", {}, h("dt", {}, "Glitches needed"), h("dd", {}, report.access_tier_label)),
     h("div", {}, h("dt", {}, "Workload"), workload),
     h("div", {}, h("dt", {}, "A new file starts in"), h("dd", {}, page.start.child,
       h("small", {}, `as adult: ${page.start.adult}`))),
@@ -200,14 +200,14 @@ function reasonNodes(page) {
   if (tier === "trapped") {
     return [
       h("p", {}, h("strong", {}, "Not one square is reachable: "),
-        "nothing in the starting pocket opens a way out."),
+        "Link can't leave the area the file starts in."),
       report.pocket.length ? h("p", {}, "Link is stuck in: ", report.pocket.join("; ")) : null,
     ];
   }
   if (tier === "impossible") {
     return [
       h("p", {}, h("strong", {}, `${plural(Object.keys(report.impossible_causes).length, "square")} ` +
-        "can never be reached"), ", even with every rule in the game read freely:"),
+        "can never be reached"), ", even with every glitch allowed and every item the seed can give:"),
       h("ul", {}, Object.entries(report.impossible_causes).map(([square, cause]) =>
         h("li", {}, h("strong", {}, square), `: ${cause}`))),
     ];
@@ -215,7 +215,7 @@ function reasonNodes(page) {
   if (tier === "unproven" || tier === "unproven_marginal") {
     return [
       h("p", {}, h("strong", {}, `The model found no route for ${plural(report.unrouted.length, "square")}`),
-        " at any tier. That is not proof they are impossible."),
+        " at any level of glitches. The model may be missing a way, so this doesn't prove they're impossible."),
     ];
   }
   const tiers = report.tier_squares;
@@ -228,7 +228,7 @@ function reasonNodes(page) {
     nodes.push(h("h3", {}, `${name === "hard_glitches" ? "Hard" : "Common"} glitches`));
     if (!state.attributed) {
       nodes.push(h("p", {}, reasons.map((reason) => reason.square).join("; "),
-        " ", h("span", { class: "pending" }, "(naming the glitches…)")));
+        " ", h("span", { class: "pending" }, "(working out which glitches…)")));
       continue;
     }
     const groups = new Map();
@@ -274,8 +274,9 @@ function renderLegend() {
     h("span", { class: `swatch bin-${index}` }), label));
   items.push(h("span", { class: "item" }, h("span", { class: "swatch no-route" }), "No route"));
   $("legend").replaceChildren(...items, h("p", {},
-    "Shade: how hard the square is (the number in its corner, 0 to 100), in fifths of 5,000 random squares. ",
-    "A chip says the square needs common or hard glitches; no chip means glitchless."));
+    "Shade: how hard the square is, from Very light to Very heavy (each shade is a fifth of 5,000 random squares). ",
+    "The number in the corner is its difficulty from 0 to 100. ",
+    "A Common or Hard tag means the square needs those glitches; no tag means it needs none."));
 }
 
 // ---------------------------------------------------------------- detail
@@ -298,7 +299,7 @@ async function showSquare(index, tapped = false) {
   const detail = $("detail");
   detail.replaceChildren(
     h("h2", {}, summary ? summary.name : "Square"),
-    h("p", { class: "hint" }, state.attributed ? "Finding routes…" : "Waiting for the glitch names to finish, then finding routes…"),
+    h("p", { class: "hint" }, state.attributed ? "Finding routes…" : "Finishing the glitch check, then finding routes…"),
   );
   const token = state.token;
   try {
@@ -319,18 +320,18 @@ function renderDetail(square) {
   const badges = h("div", { class: "badges" },
     h("span", { class: "badge" }, routed ? h("span", { class: `swatch bin-${which}` }) : null,
       routed ? `${BIN_LABELS[which]} · ${square.difficulty.toFixed(1)} of 100` : "No route found"),
-    h("span", { class: "badge" }, square.lowest_tier ? square.lowest_tier_label : "No tier routes it"),
+    h("span", { class: "badge" }, square.lowest_tier ? square.lowest_tier_label : "Not reachable even with glitches"),
   );
   const nodes = [h("h2", {}, square.name), badges];
   if (square.lowest_tier && square.lowest_tier !== "glitchless") {
     nodes.push(h("p", {}, h("strong", {}, `Needs ${square.lowest_tier_label.toLowerCase()}: `),
-      square.opened_by || (state.attributed ? "two or more together" : "naming the glitch…")));
+      square.opened_by || (state.attributed ? "a combination of glitches" : "working out which…")));
   }
   if (square.after_sky_chest) {
-    nodes.push(h("p", {}, "Reached only after beating the Sky Temple, on the file where its chest is open."));
+    nodes.push(h("p", {}, "Only reachable after you beat the Sky Temple and open its chest."));
   }
   if (routed && square.factors.length) {
-    nodes.push(h("h3", {}, "Why it scores this way"),
+    nodes.push(h("h3", {}, "What makes it hard"),
       h("ul", { class: "factors" }, square.factors.map((factor) => h("li", {}, factor))));
   }
   nodes.push(...routeNodes(square));

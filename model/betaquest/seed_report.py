@@ -106,9 +106,9 @@ def _impossible_causes(seed: int, world: World) -> dict[str, str]:
         if square in any_age:
             causes[square] = 'no door on this seed reaches it'
         elif square in by_age:
-            causes[square] = 'no route brings the age it needs'
+            causes[square] = "Link can't get there at the age it needs"
         else:
-            causes[square] = 'it needs something this seed never gives' + (f" ({', '.join(never)})" if never else '')
+            causes[square] = 'it needs something you can never get on this seed' + (f" ({', '.join(never)})" if never else '')
     return causes
 
 def _pocket(seed: int, world: World) -> list[str]:
@@ -212,7 +212,7 @@ def opener_text(reason: SquareReason) -> str:
         return f'{setting_label(needs[0])}, with another of the {tier}'
     if needs:
         return ' and '.join((setting_label(name) for name in needs)) + ', together'
-    return f'two or more of the {tier} together'
+    return f'a combination of {tier}'
 
 def format_report(report: SeedReport) -> str:
     lines = [f'Seed {report.seed} (filename {report.filename}), model {report.profile_version}']
