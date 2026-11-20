@@ -1,0 +1,8 @@
+{
+  "name": "bq-seed-explorer",
+  "private": true,
+  "description": "Pyodide for the Beta Quest Seed Explorer site (see build_site.py).",
+  "devDependencies": {
+    "pyodide": "314.0.7"
+  }
+}

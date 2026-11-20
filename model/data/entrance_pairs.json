@@ -1,0 +1,1372 @@
+{
+  "schema_version": 1,
+  "source": "OoT Randomizer EntranceShuffle.py entrance_shuffle_table",
+  "pair_count": 105,
+  "pairs": [
+    {
+      "type": "Dungeon",
+      "forward": {
+        "name": "KF Outside Deku Tree -> Deku Tree Lobby",
+        "index": 0,
+        "hex": "0x0000"
+      },
+      "reverse": {
+        "name": "Deku Tree Lobby -> KF Outside Deku Tree",
+        "index": 521,
+        "hex": "0x0209"
+      }
+    },
+    {
+      "type": "Dungeon",
+      "forward": {
+        "name": "Death Mountain -> Dodongos Cavern Beginning",
+        "index": 4,
+        "hex": "0x0004"
+      },
+      "reverse": {
+        "name": "Dodongos Cavern Beginning -> Death Mountain",
+        "index": 578,
+        "hex": "0x0242"
+      }
+    },
+    {
+      "type": "Dungeon",
+      "forward": {
+        "name": "Zoras Fountain -> Jabu Jabus Belly Beginning",
+        "index": 40,
+        "hex": "0x0028"
+      },
+      "reverse": {
+        "name": "Jabu Jabus Belly Beginning -> Zoras Fountain",
+        "index": 545,
+        "hex": "0x0221"
+      }
+    },
+    {
+      "type": "Dungeon",
+      "forward": {
+        "name": "SFM Forest Temple Entrance Ledge -> Forest Temple Lobby",
+        "index": 361,
+        "hex": "0x0169"
+      },
+      "reverse": {
+        "name": "Forest Temple Lobby -> SFM Forest Temple Entrance Ledge",
+        "index": 533,
+        "hex": "0x0215"
+      }
+    },
+    {
+      "type": "Dungeon",
+      "forward": {
+        "name": "DMC Fire Temple Entrance -> Fire Temple Lower",
+        "index": 357,
+        "hex": "0x0165"
+      },
+      "reverse": {
+        "name": "Fire Temple Lower -> DMC Fire Temple Entrance",
+        "index": 586,
+        "hex": "0x024A"
+      }
+    },
+    {
+      "type": "Dungeon",
+      "forward": {
+        "name": "Lake Hylia -> Water Temple Lobby",
+        "index": 16,
+        "hex": "0x0010"
+      },
+      "reverse": {
+        "name": "Water Temple Lobby -> Lake Hylia",
+        "index": 541,
+        "hex": "0x021D"
+      }
+    },
+    {
+      "type": "Dungeon",
+      "forward": {
+        "name": "Graveyard Warp Pad Region -> Shadow Temple Entryway",
+        "index": 55,
+        "hex": "0x0037"
+      },
+      "reverse": {
+        "name": "Shadow Temple Entryway -> Graveyard Warp Pad Region",
+        "index": 517,
+        "hex": "0x0205"
+      }
+    },
+    {
+      "type": "Dungeon",
+      "forward": {
+        "name": "Desert Colossus -> Spirit Temple Lobby",
+        "index": 130,
+        "hex": "0x0082"
+      },
+      "reverse": {
+        "name": "Spirit Temple Lobby -> Desert Colossus From Spirit Lobby",
+        "index": 481,
+        "hex": "0x01E1"
+      }
+    },
+    {
+      "type": "Dungeon",
+      "forward": {
+        "name": "Kakariko Village -> Bottom of the Well",
+        "index": 152,
+        "hex": "0x0098"
+      },
+      "reverse": {
+        "name": "Bottom of the Well -> Kakariko Village",
+        "index": 678,
+        "hex": "0x02A6"
+      }
+    },
+    {
+      "type": "Dungeon",
+      "forward": {
+        "name": "ZF Ice Ledge -> Ice Cavern Beginning",
+        "index": 136,
+        "hex": "0x0088"
+      },
+      "reverse": {
+        "name": "Ice Cavern Beginning -> ZF Ice Ledge",
+        "index": 980,
+        "hex": "0x03D4"
+      }
+    },
+    {
+      "type": "Dungeon",
+      "forward": {
+        "name": "Gerudo Fortress -> Gerudo Training Ground Lobby",
+        "index": 8,
+        "hex": "0x0008"
+      },
+      "reverse": {
+        "name": "Gerudo Training Ground Lobby -> Gerudo Fortress",
+        "index": 936,
+        "hex": "0x03A8"
+      }
+    },
+    {
+      "type": "DungeonSpecial",
+      "forward": {
+        "name": "Ganons Castle Ledge -> Ganons Castle Lobby",
+        "index": 1127,
+        "hex": "0x0467"
+      },
+      "reverse": {
+        "name": "Ganons Castle Lobby -> Castle Grounds From Ganons Castle",
+        "index": 573,
+        "hex": "0x023D"
+      }
+    },
+    {
+      "type": "ChildBoss",
+      "forward": {
+        "name": "Deku Tree Before Boss -> Queen Gohma Boss Room",
+        "index": 1039,
+        "hex": "0x040F"
+      },
+      "reverse": {
+        "name": "Queen Gohma Boss Room -> Deku Tree Before Boss",
+        "index": 594,
+        "hex": "0x0252"
+      }
+    },
+    {
+      "type": "ChildBoss",
+      "forward": {
+        "name": "Dodongos Cavern Before Boss -> King Dodongo Boss Room",
+        "index": 1035,
+        "hex": "0x040B"
+      },
+      "reverse": {
+        "name": "King Dodongo Boss Room -> Dodongos Cavern Mouth",
+        "index": 197,
+        "hex": "0x00C5"
+      }
+    },
+    {
+      "type": "ChildBoss",
+      "forward": {
+        "name": "Jabu Jabus Belly Before Boss -> Barinade Boss Room",
+        "index": 769,
+        "hex": "0x0301"
+      },
+      "reverse": {
+        "name": "Barinade Boss Room -> Jabu Jabus Belly Before Boss",
+        "index": 1031,
+        "hex": "0x0407"
+      }
+    },
+    {
+      "type": "AdultBoss",
+      "forward": {
+        "name": "Forest Temple Before Boss -> Phantom Ganon Boss Room",
+        "index": 12,
+        "hex": "0x000C"
+      },
+      "reverse": {
+        "name": "Phantom Ganon Boss Room -> Forest Temple Before Boss",
+        "index": 590,
+        "hex": "0x024E"
+      }
+    },
+    {
+      "type": "AdultBoss",
+      "forward": {
+        "name": "Fire Temple Before Boss -> Volvagia Boss Room",
+        "index": 773,
+        "hex": "0x0305"
+      },
+      "reverse": {
+        "name": "Volvagia Boss Room -> Fire Temple Before Boss",
+        "index": 373,
+        "hex": "0x0175"
+      }
+    },
+    {
+      "type": "AdultBoss",
+      "forward": {
+        "name": "Water Temple Before Boss -> Morpha Boss Room",
+        "index": 1047,
+        "hex": "0x0417"
+      },
+      "reverse": {
+        "name": "Morpha Boss Room -> Water Temple Before Boss",
+        "index": 1059,
+        "hex": "0x0423"
+      }
+    },
+    {
+      "type": "AdultBoss",
+      "forward": {
+        "name": "Shadow Temple Before Boss -> Bongo Bongo Boss Room",
+        "index": 1043,
+        "hex": "0x0413"
+      },
+      "reverse": {
+        "name": "Bongo Bongo Boss Room -> Shadow Temple Before Boss",
+        "index": 690,
+        "hex": "0x02B2"
+      }
+    },
+    {
+      "type": "AdultBoss",
+      "forward": {
+        "name": "Spirit Temple Before Boss -> Twinrova Boss Room",
+        "index": 141,
+        "hex": "0x008D"
+      },
+      "reverse": {
+        "name": "Twinrova Boss Room -> Spirit Temple Before Boss",
+        "index": 757,
+        "hex": "0x02F5"
+      }
+    },
+    {
+      "type": "SpecialBoss",
+      "forward": {
+        "name": "Ganons Castle Main -> Ganons Castle Tower",
+        "index": 1051,
+        "hex": "0x041B"
+      },
+      "reverse": {
+        "name": "Ganons Castle Tower -> Ganons Castle Main",
+        "index": 1332,
+        "hex": "0x0534"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Kokiri Forest -> KF Midos House",
+        "index": 1075,
+        "hex": "0x0433"
+      },
+      "reverse": {
+        "name": "KF Midos House -> Kokiri Forest",
+        "index": 1091,
+        "hex": "0x0443"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Kokiri Forest -> KF Sarias House",
+        "index": 1079,
+        "hex": "0x0437"
+      },
+      "reverse": {
+        "name": "KF Sarias House -> Kokiri Forest",
+        "index": 1095,
+        "hex": "0x0447"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Kokiri Forest -> KF House of Twins",
+        "index": 156,
+        "hex": "0x009C"
+      },
+      "reverse": {
+        "name": "KF House of Twins -> Kokiri Forest",
+        "index": 828,
+        "hex": "0x033C"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Kokiri Forest -> KF Know It All House",
+        "index": 201,
+        "hex": "0x00C9"
+      },
+      "reverse": {
+        "name": "KF Know It All House -> Kokiri Forest",
+        "index": 618,
+        "hex": "0x026A"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Kokiri Forest -> KF Kokiri Shop",
+        "index": 193,
+        "hex": "0x00C1"
+      },
+      "reverse": {
+        "name": "KF Kokiri Shop -> Kokiri Forest",
+        "index": 614,
+        "hex": "0x0266"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Lake Hylia -> LH Lab",
+        "index": 67,
+        "hex": "0x0043"
+      },
+      "reverse": {
+        "name": "LH Lab -> Lake Hylia",
+        "index": 972,
+        "hex": "0x03CC"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "LH Fishing Island -> LH Fishing Hole",
+        "index": 1119,
+        "hex": "0x045F"
+      },
+      "reverse": {
+        "name": "LH Fishing Hole -> LH Fishing Island",
+        "index": 777,
+        "hex": "0x0309"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "GV Fortress Side -> GV Carpenter Tent",
+        "index": 928,
+        "hex": "0x03A0"
+      },
+      "reverse": {
+        "name": "GV Carpenter Tent -> GV Fortress Side",
+        "index": 976,
+        "hex": "0x03D0"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Market Entrance -> Market Guard House",
+        "index": 126,
+        "hex": "0x007E"
+      },
+      "reverse": {
+        "name": "Market Guard House -> Market Entrance",
+        "index": 622,
+        "hex": "0x026E"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Market -> Market Mask Shop",
+        "index": 1328,
+        "hex": "0x0530"
+      },
+      "reverse": {
+        "name": "Market Mask Shop -> Market",
+        "index": 465,
+        "hex": "0x01D1"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Market -> Market Bombchu Bowling",
+        "index": 1287,
+        "hex": "0x0507"
+      },
+      "reverse": {
+        "name": "Market Bombchu Bowling -> Market",
+        "index": 956,
+        "hex": "0x03BC"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Market -> Market Potion Shop",
+        "index": 904,
+        "hex": "0x0388"
+      },
+      "reverse": {
+        "name": "Market Potion Shop -> Market",
+        "index": 674,
+        "hex": "0x02A2"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Market -> Market Treasure Chest Game",
+        "index": 99,
+        "hex": "0x0063"
+      },
+      "reverse": {
+        "name": "Market Treasure Chest Game -> Market",
+        "index": 469,
+        "hex": "0x01D5"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Market Back Alley -> Market Bombchu Shop",
+        "index": 1320,
+        "hex": "0x0528"
+      },
+      "reverse": {
+        "name": "Market Bombchu Shop -> Market Back Alley",
+        "index": 960,
+        "hex": "0x03C0"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Market Back Alley -> Market Man in Green House",
+        "index": 1083,
+        "hex": "0x043B"
+      },
+      "reverse": {
+        "name": "Market Man in Green House -> Market Back Alley",
+        "index": 103,
+        "hex": "0x0067"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Kakariko Village -> Kak Carpenter Boss House",
+        "index": 765,
+        "hex": "0x02FD"
+      },
+      "reverse": {
+        "name": "Kak Carpenter Boss House -> Kakariko Village",
+        "index": 841,
+        "hex": "0x0349"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Kakariko Village -> Kak House of Skulltula",
+        "index": 1360,
+        "hex": "0x0550"
+      },
+      "reverse": {
+        "name": "Kak House of Skulltula -> Kakariko Village",
+        "index": 1262,
+        "hex": "0x04EE"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Kakariko Village -> Kak Impas House",
+        "index": 924,
+        "hex": "0x039C"
+      },
+      "reverse": {
+        "name": "Kak Impas House -> Kakariko Village",
+        "index": 837,
+        "hex": "0x0345"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Kak Impas Ledge -> Kak Impas House Back",
+        "index": 1480,
+        "hex": "0x05C8"
+      },
+      "reverse": {
+        "name": "Kak Impas House Back -> Kak Impas Ledge",
+        "index": 1500,
+        "hex": "0x05DC"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Kak Backyard -> Kak Odd Medicine Building",
+        "index": 114,
+        "hex": "0x0072"
+      },
+      "reverse": {
+        "name": "Kak Odd Medicine Building -> Kak Backyard",
+        "index": 845,
+        "hex": "0x034D"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Graveyard -> Graveyard Dampes House",
+        "index": 781,
+        "hex": "0x030D"
+      },
+      "reverse": {
+        "name": "Graveyard Dampes House -> Graveyard",
+        "index": 853,
+        "hex": "0x0355"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Goron City -> GC Shop",
+        "index": 892,
+        "hex": "0x037C"
+      },
+      "reverse": {
+        "name": "GC Shop -> Goron City",
+        "index": 1020,
+        "hex": "0x03FC"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Zoras Domain -> ZD Shop",
+        "index": 896,
+        "hex": "0x0380"
+      },
+      "reverse": {
+        "name": "ZD Shop -> Zoras Domain",
+        "index": 964,
+        "hex": "0x03C4"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Lon Lon Ranch -> LLR Talons House",
+        "index": 79,
+        "hex": "0x004F"
+      },
+      "reverse": {
+        "name": "LLR Talons House -> Lon Lon Ranch",
+        "index": 888,
+        "hex": "0x0378"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Lon Lon Ranch -> LLR Stables",
+        "index": 761,
+        "hex": "0x02F9"
+      },
+      "reverse": {
+        "name": "LLR Stables -> Lon Lon Ranch",
+        "index": 1071,
+        "hex": "0x042F"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Lon Lon Ranch -> LLR Tower",
+        "index": 1488,
+        "hex": "0x05D0"
+      },
+      "reverse": {
+        "name": "LLR Tower -> Lon Lon Ranch",
+        "index": 1492,
+        "hex": "0x05D4"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Market -> Market Bazaar",
+        "index": 1324,
+        "hex": "0x052C"
+      },
+      "reverse": {
+        "name": "Market Bazaar -> Market",
+        "index": 952,
+        "hex": "0x03B8"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Market -> Market Shooting Gallery",
+        "index": 365,
+        "hex": "0x016D"
+      },
+      "reverse": {
+        "name": "Market Shooting Gallery -> Market",
+        "index": 461,
+        "hex": "0x01CD"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Kakariko Village -> Kak Bazaar",
+        "index": 183,
+        "hex": "0x00B7"
+      },
+      "reverse": {
+        "name": "Kak Bazaar -> Kakariko Village",
+        "index": 513,
+        "hex": "0x0201"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Kakariko Village -> Kak Shooting Gallery",
+        "index": 59,
+        "hex": "0x003B"
+      },
+      "reverse": {
+        "name": "Kak Shooting Gallery -> Kakariko Village",
+        "index": 1123,
+        "hex": "0x0463"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Desert Colossus -> Colossus Great Fairy Fountain",
+        "index": 1416,
+        "hex": "0x0588"
+      },
+      "reverse": {
+        "name": "Colossus Great Fairy Fountain -> Desert Colossus",
+        "index": 1404,
+        "hex": "0x057C"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Hyrule Castle Grounds -> HC Great Fairy Fountain",
+        "index": 1400,
+        "hex": "0x0578"
+      },
+      "reverse": {
+        "name": "HC Great Fairy Fountain -> Castle Grounds",
+        "index": 832,
+        "hex": "0x0340"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Ganons Castle Grounds -> OGC Great Fairy Fountain",
+        "index": 1218,
+        "hex": "0x04C2"
+      },
+      "reverse": {
+        "name": "OGC Great Fairy Fountain -> Castle Grounds",
+        "index": 832,
+        "hex": "0x0340"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "DMC Lower Nearby -> DMC Great Fairy Fountain",
+        "index": 1214,
+        "hex": "0x04BE"
+      },
+      "reverse": {
+        "name": "DMC Great Fairy Fountain -> DMC Lower Local",
+        "index": 1154,
+        "hex": "0x0482"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Death Mountain Summit -> DMT Great Fairy Fountain",
+        "index": 789,
+        "hex": "0x0315"
+      },
+      "reverse": {
+        "name": "DMT Great Fairy Fountain -> Death Mountain Summit",
+        "index": 1115,
+        "hex": "0x045B"
+      }
+    },
+    {
+      "type": "Interior",
+      "forward": {
+        "name": "Zoras Fountain -> ZF Great Fairy Fountain",
+        "index": 881,
+        "hex": "0x0371"
+      },
+      "reverse": {
+        "name": "ZF Great Fairy Fountain -> Zoras Fountain",
+        "index": 916,
+        "hex": "0x0394"
+      }
+    },
+    {
+      "type": "SpecialInterior",
+      "forward": {
+        "name": "Kokiri Forest -> KF Links House",
+        "index": 626,
+        "hex": "0x0272"
+      },
+      "reverse": {
+        "name": "KF Links House -> Kokiri Forest",
+        "index": 529,
+        "hex": "0x0211"
+      }
+    },
+    {
+      "type": "SpecialInterior",
+      "forward": {
+        "name": "ToT Entrance -> Temple of Time",
+        "index": 83,
+        "hex": "0x0053"
+      },
+      "reverse": {
+        "name": "Temple of Time -> ToT Entrance",
+        "index": 1138,
+        "hex": "0x0472"
+      }
+    },
+    {
+      "type": "SpecialInterior",
+      "forward": {
+        "name": "Kakariko Village -> Kak Windmill",
+        "index": 1107,
+        "hex": "0x0453"
+      },
+      "reverse": {
+        "name": "Kak Windmill -> Kakariko Village",
+        "index": 849,
+        "hex": "0x0351"
+      }
+    },
+    {
+      "type": "SpecialInterior",
+      "forward": {
+        "name": "Kakariko Village -> Kak Potion Shop Front",
+        "index": 900,
+        "hex": "0x0384"
+      },
+      "reverse": {
+        "name": "Kak Potion Shop Front -> Kakariko Village",
+        "index": 1099,
+        "hex": "0x044B"
+      }
+    },
+    {
+      "type": "SpecialInterior",
+      "forward": {
+        "name": "Kak Backyard -> Kak Potion Shop Back",
+        "index": 1004,
+        "hex": "0x03EC"
+      },
+      "reverse": {
+        "name": "Kak Potion Shop Back -> Kak Backyard",
+        "index": 1279,
+        "hex": "0x04FF"
+      }
+    },
+    {
+      "type": "Hideout",
+      "forward": {
+        "name": "Gerudo Fortress -> Hideout 1 Torch Jail",
+        "index": 1158,
+        "hex": "0x0486"
+      },
+      "reverse": {
+        "name": "Hideout 1 Torch Jail -> Gerudo Fortress",
+        "index": 561,
+        "hex": "0x0231"
+      }
+    },
+    {
+      "type": "Hideout",
+      "forward": {
+        "name": "GF Entrances Behind Crates -> Hideout 1 Torch Jail",
+        "index": 1162,
+        "hex": "0x048A"
+      },
+      "reverse": {
+        "name": "Hideout 1 Torch Jail -> GF Entrances Behind Crates",
+        "index": 565,
+        "hex": "0x0235"
+      }
+    },
+    {
+      "type": "Hideout",
+      "forward": {
+        "name": "GF Entrances Behind Crates -> Hideout Kitchen Hallway",
+        "index": 1166,
+        "hex": "0x048E"
+      },
+      "reverse": {
+        "name": "Hideout Kitchen Hallway -> GF Entrances Behind Crates",
+        "index": 569,
+        "hex": "0x0239"
+      }
+    },
+    {
+      "type": "Hideout",
+      "forward": {
+        "name": "Gerudo Fortress -> Hideout Kitchen Hallway",
+        "index": 1170,
+        "hex": "0x0492"
+      },
+      "reverse": {
+        "name": "Hideout Kitchen Hallway -> Gerudo Fortress",
+        "index": 682,
+        "hex": "0x02AA"
+      }
+    },
+    {
+      "type": "Hideout",
+      "forward": {
+        "name": "Gerudo Fortress -> Hideout 4 Torches Jail",
+        "index": 1174,
+        "hex": "0x0496"
+      },
+      "reverse": {
+        "name": "Hideout 4 Torches Jail -> Gerudo Fortress",
+        "index": 698,
+        "hex": "0x02BA"
+      }
+    },
+    {
+      "type": "Hideout",
+      "forward": {
+        "name": "GF Roof Entrance Cluster -> Hideout 4 Torches Jail",
+        "index": 1178,
+        "hex": "0x049A"
+      },
+      "reverse": {
+        "name": "Hideout 4 Torches Jail -> GF Roof Entrance Cluster",
+        "index": 702,
+        "hex": "0x02BE"
+      }
+    },
+    {
+      "type": "Hideout",
+      "forward": {
+        "name": "Gerudo Fortress -> Hideout 2 Torches Jail",
+        "index": 1182,
+        "hex": "0x049E"
+      },
+      "reverse": {
+        "name": "Hideout 2 Torches Jail -> Gerudo Fortress",
+        "index": 706,
+        "hex": "0x02C2"
+      }
+    },
+    {
+      "type": "Hideout",
+      "forward": {
+        "name": "GF Roof Entrance Cluster -> Hideout 2 Torches Jail",
+        "index": 1186,
+        "hex": "0x04A2"
+      },
+      "reverse": {
+        "name": "Hideout 2 Torches Jail -> GF Roof Entrance Cluster",
+        "index": 710,
+        "hex": "0x02C6"
+      }
+    },
+    {
+      "type": "Hideout",
+      "forward": {
+        "name": "GF Roof Entrance Cluster -> Hideout Kitchen Front",
+        "index": 1190,
+        "hex": "0x04A6"
+      },
+      "reverse": {
+        "name": "Hideout Kitchen Front -> GF Roof Entrance Cluster",
+        "index": 722,
+        "hex": "0x02D2"
+      }
+    },
+    {
+      "type": "Hideout",
+      "forward": {
+        "name": "GF Kitchen Roof Access -> Hideout Kitchen Rear",
+        "index": 1194,
+        "hex": "0x04AA"
+      },
+      "reverse": {
+        "name": "Hideout Kitchen Rear -> GF Kitchen Roof Access",
+        "index": 726,
+        "hex": "0x02D6"
+      }
+    },
+    {
+      "type": "Hideout",
+      "forward": {
+        "name": "GF Break Room Entrance -> Hideout Break Room",
+        "index": 1198,
+        "hex": "0x04AE"
+      },
+      "reverse": {
+        "name": "Hideout Break Room -> GF Break Room Entrance",
+        "index": 730,
+        "hex": "0x02DA"
+      }
+    },
+    {
+      "type": "Hideout",
+      "forward": {
+        "name": "GF Balcony -> Hideout Hall to Balcony",
+        "index": 1202,
+        "hex": "0x04B2"
+      },
+      "reverse": {
+        "name": "Hideout Hall to Balcony -> GF Balcony",
+        "index": 734,
+        "hex": "0x02DE"
+      }
+    },
+    {
+      "type": "Hideout",
+      "forward": {
+        "name": "GF 3 Torches Jail Exterior -> Hideout 3 Torches Jail",
+        "index": 1392,
+        "hex": "0x0570"
+      },
+      "reverse": {
+        "name": "Hideout 3 Torches Jail -> GF 3 Torches Jail Exterior",
+        "index": 932,
+        "hex": "0x03A4"
+      }
+    },
+    {
+      "type": "Grave",
+      "forward": {
+        "name": "Graveyard -> Graveyard Shield Grave",
+        "index": 75,
+        "hex": "0x004B"
+      },
+      "reverse": {
+        "name": "Graveyard Shield Grave -> Graveyard",
+        "index": 861,
+        "hex": "0x035D"
+      }
+    },
+    {
+      "type": "Grave",
+      "forward": {
+        "name": "Graveyard -> Graveyard Heart Piece Grave",
+        "index": 796,
+        "hex": "0x031C"
+      },
+      "reverse": {
+        "name": "Graveyard Heart Piece Grave -> Graveyard",
+        "index": 865,
+        "hex": "0x0361"
+      }
+    },
+    {
+      "type": "Grave",
+      "forward": {
+        "name": "Graveyard -> Graveyard Royal Familys Tomb",
+        "index": 45,
+        "hex": "0x002D"
+      },
+      "reverse": {
+        "name": "Graveyard Royal Familys Tomb -> Graveyard",
+        "index": 1291,
+        "hex": "0x050B"
+      }
+    },
+    {
+      "type": "Grave",
+      "forward": {
+        "name": "Graveyard -> Graveyard Dampes Grave",
+        "index": 1103,
+        "hex": "0x044F"
+      },
+      "reverse": {
+        "name": "Graveyard Dampes Grave -> Graveyard",
+        "index": 857,
+        "hex": "0x0359"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Kokiri Forest -> LW Bridge From Forest",
+        "index": 1504,
+        "hex": "0x05E0"
+      },
+      "reverse": {
+        "name": "LW Bridge -> Kokiri Forest",
+        "index": 525,
+        "hex": "0x020D"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Kokiri Forest -> Lost Woods",
+        "index": 286,
+        "hex": "0x011E"
+      },
+      "reverse": {
+        "name": "LW Forest Exit -> Kokiri Forest",
+        "index": 646,
+        "hex": "0x0286"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Lost Woods -> GC Woods Warp",
+        "index": 1250,
+        "hex": "0x04E2"
+      },
+      "reverse": {
+        "name": "GC Woods Warp -> Lost Woods",
+        "index": 1238,
+        "hex": "0x04D6"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Lost Woods -> Zora River",
+        "index": 477,
+        "hex": "0x01DD"
+      },
+      "reverse": {
+        "name": "Zora River -> LW Underwater Entrance",
+        "index": 1242,
+        "hex": "0x04DA"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "LW Beyond Mido -> SFM Entryway",
+        "index": 252,
+        "hex": "0x00FC"
+      },
+      "reverse": {
+        "name": "SFM Entryway -> LW Beyond Mido",
+        "index": 425,
+        "hex": "0x01A9"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "LW Bridge -> Hyrule Field",
+        "index": 389,
+        "hex": "0x0185"
+      },
+      "reverse": {
+        "name": "Hyrule Field -> LW Bridge",
+        "index": 1246,
+        "hex": "0x04DE"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Hyrule Field -> Lake Hylia",
+        "index": 258,
+        "hex": "0x0102"
+      },
+      "reverse": {
+        "name": "Lake Hylia -> Hyrule Field",
+        "index": 393,
+        "hex": "0x0189"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Hyrule Field -> Gerudo Valley",
+        "index": 279,
+        "hex": "0x0117"
+      },
+      "reverse": {
+        "name": "Gerudo Valley -> Hyrule Field",
+        "index": 397,
+        "hex": "0x018D"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Hyrule Field -> Market Entrance",
+        "index": 630,
+        "hex": "0x0276"
+      },
+      "reverse": {
+        "name": "Market Entrance -> Hyrule Field",
+        "index": 509,
+        "hex": "0x01FD"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Hyrule Field -> Kakariko Village",
+        "index": 219,
+        "hex": "0x00DB"
+      },
+      "reverse": {
+        "name": "Kakariko Village -> Hyrule Field",
+        "index": 381,
+        "hex": "0x017D"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Hyrule Field -> ZR Front",
+        "index": 234,
+        "hex": "0x00EA"
+      },
+      "reverse": {
+        "name": "ZR Front -> Hyrule Field",
+        "index": 385,
+        "hex": "0x0181"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Hyrule Field -> Lon Lon Ranch",
+        "index": 343,
+        "hex": "0x0157"
+      },
+      "reverse": {
+        "name": "Lon Lon Ranch -> Hyrule Field",
+        "index": 505,
+        "hex": "0x01F9"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Lake Hylia -> Zoras Domain",
+        "index": 808,
+        "hex": "0x0328"
+      },
+      "reverse": {
+        "name": "Zoras Domain -> Lake Hylia",
+        "index": 1376,
+        "hex": "0x0560"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "GV Fortress Side -> Gerudo Fortress",
+        "index": 297,
+        "hex": "0x0129"
+      },
+      "reverse": {
+        "name": "Gerudo Fortress -> GV Fortress Side",
+        "index": 557,
+        "hex": "0x022D"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "GF Outside Gate -> Wasteland Near Fortress",
+        "index": 304,
+        "hex": "0x0130"
+      },
+      "reverse": {
+        "name": "Wasteland Near Fortress -> GF Outside Gate",
+        "index": 940,
+        "hex": "0x03AC"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Wasteland Near Colossus -> Desert Colossus",
+        "index": 291,
+        "hex": "0x0123"
+      },
+      "reverse": {
+        "name": "Desert Colossus -> Wasteland Near Colossus",
+        "index": 869,
+        "hex": "0x0365"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Market Entrance -> Market",
+        "index": 177,
+        "hex": "0x00B1"
+      },
+      "reverse": {
+        "name": "Market -> Market Entrance",
+        "index": 51,
+        "hex": "0x0033"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Market -> Castle Grounds",
+        "index": 312,
+        "hex": "0x0138"
+      },
+      "reverse": {
+        "name": "Castle Grounds -> Market",
+        "index": 602,
+        "hex": "0x025A"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Market -> ToT Entrance",
+        "index": 369,
+        "hex": "0x0171"
+      },
+      "reverse": {
+        "name": "ToT Entrance -> Market",
+        "index": 606,
+        "hex": "0x025E"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Kakariko Village -> Graveyard",
+        "index": 228,
+        "hex": "0x00E4"
+      },
+      "reverse": {
+        "name": "Graveyard -> Kakariko Village",
+        "index": 405,
+        "hex": "0x0195"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Kak Behind Gate -> Death Mountain",
+        "index": 317,
+        "hex": "0x013D"
+      },
+      "reverse": {
+        "name": "Death Mountain -> Kak Behind Gate",
+        "index": 401,
+        "hex": "0x0191"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Death Mountain -> Goron City",
+        "index": 333,
+        "hex": "0x014D"
+      },
+      "reverse": {
+        "name": "Goron City -> Death Mountain",
+        "index": 441,
+        "hex": "0x01B9"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "GC Darunias Chamber -> DMC Lower Local",
+        "index": 582,
+        "hex": "0x0246"
+      },
+      "reverse": {
+        "name": "DMC Lower Nearby -> GC Darunias Chamber",
+        "index": 449,
+        "hex": "0x01C1"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "Death Mountain Summit -> DMC Upper Local",
+        "index": 327,
+        "hex": "0x0147"
+      },
+      "reverse": {
+        "name": "DMC Upper Nearby -> Death Mountain Summit",
+        "index": 445,
+        "hex": "0x01BD"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "ZR Behind Waterfall -> Zoras Domain",
+        "index": 264,
+        "hex": "0x0108"
+      },
+      "reverse": {
+        "name": "Zoras Domain -> ZR Behind Waterfall",
+        "index": 413,
+        "hex": "0x019D"
+      }
+    },
+    {
+      "type": "Overworld",
+      "forward": {
+        "name": "ZD Behind King Zora -> Zoras Fountain",
+        "index": 549,
+        "hex": "0x0225"
+      },
+      "reverse": {
+        "name": "Zoras Fountain -> ZD Behind King Zora",
+        "index": 417,
+        "hex": "0x01A1"
+      }
+    }
+  ]
+}

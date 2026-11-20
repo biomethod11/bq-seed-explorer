@@ -1,0 +1,51 @@
+{
+  "profile_version": "3.5-tiered+a16cb34b",
+  "sample_size": 100000,
+  "rng_seed": 20260822,
+  "source": "database",
+  "database_selection": {
+    "mode": "fixed_cohort",
+    "target_size": 100000,
+    "rng_seed": 20260822,
+    "manifest_format": "ordered numeric seed ids, one per line, trailing newline",
+    "manifest_sha256": "19b0c29bc9d6064a3797ec338821c412eae360664a634ca9366b3d422a340cbb",
+    "current_model_rows_seen": 999999,
+    "unrelated_current_rows_ignored": 899999
+  },
+  "elapsed_seconds": 0.0,
+  "seeds_per_second": null,
+  "access_tier_counts": {
+    "glitchless": 61321,
+    "hard_glitches": 31237,
+    "common_glitches": 7092,
+    "trapped": 224,
+    "impossible": 126
+  },
+  "access_tier_share": {
+    "glitchless": 0.61321,
+    "hard_glitches": 0.31237,
+    "common_glitches": 0.07092,
+    "trapped": 0.00224,
+    "impossible": 0.00126
+  },
+  "proven_share": 0.9965,
+  "total_unreached_by_tier": null,
+  "effort_bands": [
+    38.864,
+    41.895,
+    44.703,
+    48.032
+  ],
+  "effort_summary": {
+    "n": 99650,
+    "min": 27.058,
+    "mean": 43.506,
+    "max": 68.922
+  },
+  "residual_histogram": {
+    "0": 99650,
+    "1": 123,
+    "2": 3,
+    "25": 224
+  }
+}
