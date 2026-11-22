@@ -15,12 +15,21 @@
       <p class="tagline">A seed analyzer for Beta Quest Bingo</p>
     </div>
     <form id="seed-form" class="seed-form" autocomplete="off">
-      <label for="seed-input">Seed</label>
+      <label for="seed-input" id="seed-label">Seed</label>
       <input id="seed-input" name="seed" inputmode="numeric" pattern="[0-9]{1,6}" maxlength="6"
              placeholder="1 to 999999" required aria-describedby="seed-help">
+      <span id="card-field" class="card-field" hidden>
+        <label for="card-input">BingoSync Seed</label>
+        <input id="card-input" name="card" inputmode="numeric" pattern="[0-9]{1,6}" maxlength="6"
+               placeholder="1 to 999999" aria-describedby="card-help">
+      </span>
       <button type="submit">Analyze</button>
       <button type="button" id="random-seed" class="quiet">Random</button>
-      <p id="seed-help" class="visually-hidden">The BingoSync seed number, from 1 to 999999.</p>
+      <label class="split-toggle">
+        <input type="checkbox" id="split-card"> Different BingoSync seed from Beta Quest filename seed
+      </label>
+      <p id="seed-help" class="visually-hidden">A number from 1 to 999999. It sets the Beta Quest file name, and the BingoSync card too unless a different BingoSync seed is given.</p>
+      <p id="card-help" class="visually-hidden">The BingoSync seed whose card is scored on the Beta Quest filename seed.</p>
     </form>
   </header>
 
@@ -31,6 +40,9 @@
     <p>Analyze any seed that corresponds to a Beta Quest filename seed and a BingoSync seed
       (range 1-999999). This will generate the BingoSync board for that seed, then use a model of
       the Beta Quest seed to find routes to each goal and score the difficulty of each goal.</p>
+    <p>If the race's BingoSync card comes from a different seed than the Beta Quest file name,
+      tick <strong>Different BingoSync seed from Beta Quest filename seed</strong> and enter both:
+      the page then scores that card on the file name's seed.</p>
     <p>Example seeds:</p>
     <ul class="examples">
       <li><button type="button" data-seed="274451">274451</button> needs hard glitches for one square and common glitches for twelve</li>

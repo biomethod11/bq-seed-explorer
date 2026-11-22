@@ -1,9 +1,10 @@
 from __future__ import annotations
 import sqlite3
-from contextlib import closing
+from contextlib import closing, contextmanager
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Mapping
+from . import profile as _profile_module
 from .bingosync import analyze_seed, canonical_seed, filename_for_seed, native_board
 from .discovery import seed_world_for_filename
 from .logic import solve
@@ -36,6 +37,7 @@ class HeavySquare:
 class SeedReport:
     seed: int
     filename: str
+    card_seed: int
     profile_version: str
     access_tier: str
     access_tier_label: str
@@ -87,14 +89,14 @@ def attribute_squares(profile: SeedProfile, unreached: Unreached) -> dict[str, l
         reasons[tier] = [SquareReason(square, tier, opened[square], needed.get(square, [])) for square in squares]
     return reasons
 
-def _impossible_causes(seed: int, world: World) -> dict[str, str]:
+def _impossible_causes(seed: int, world: World, board: list[dict] | None=None) -> dict[str, str]:
     from .relaxed import NOTABLE_MISSING, Relaxer, item_aware_free_world, relax_world
     from .rules import DEFAULT_SETTINGS, RuleEvaluator
     hard = TIER_SETTINGS['hard_glitches']
     filename = filename_for_seed(seed)
 
     def unrouted(relaxed: World) -> set[str]:
-        return set(_tier_result('hard_glitches', analyze_seed(seed, world=relaxed, settings=hard)).unreached_goal_names)
+        return set(_tier_result('hard_glitches', analyze_seed(seed, world=relaxed, settings=hard, board=board)).unreached_goal_names)
     relaxed, missing = item_aware_free_world(world, filename, hard, strict_age=True)
     failing = unrouted(relaxed)
     evaluator = RuleEvaluator(items=world.item_names, events=world.event_names, settings={**DEFAULT_SETTINGS, **hard})
@@ -140,14 +142,28 @@ def _compare_stored(row: Mapping[str, Any] | None, profile: SeedProfile) -> dict
         differences.append(f"residual {row.get('residual')} stored, {profile.residual} live")
     return {'found': True, 'current': current, 'model_version': row.get('model_version'), 'matches': current and (not differences), 'differences': differences}
 
+@contextmanager
+def _profile_board(board: list[dict]):
+    original = _profile_module.native_board
+    _profile_module.native_board = lambda seed, node=None: [dict(goal) for goal in board]
+    try:
+        yield
+    finally:
+        _profile_module.native_board = original
+
 class SeedSolves:
 
-    def __init__(self, seed: int | str, world: World | None=None) -> None:
+    def __init__(self, seed: int | str, world: World | None=None, card: int | str | None=None) -> None:
         self.seed = canonical_seed(seed)
+        self.card = self.seed if card is None else canonical_seed(card)
         self.world = world or World.load()
         self.filename = filename_for_seed(self.seed)
-        self.profile = profile_seed(self.seed, world=self.world, exhaustive=True)
-        self.board = native_board(self.seed)
+        self.board = native_board(self.card)
+        if self.card == self.seed:
+            self.profile = profile_seed(self.seed, world=self.world, exhaustive=True)
+        else:
+            with _profile_board(self.board):
+                self.profile = profile_seed(self.seed, world=self.world, exhaustive=True)
         self._shared = seed_world_for_filename(self.filename, self.world)
         self._chest: list = []
         self._analyses: dict[str, Any] = {}
@@ -176,8 +192,8 @@ class SeedSolves:
             return self._attributed
         return {tier: [SquareReason(square, tier) for square in squares] for tier, squares in self.profile.tier_unlock_goals.items() if squares}
 
-def explain_seed(seed: int | str, world: World | None=None, database: Path | None=None, attribute: bool=True, heaviest: int=HEAVIEST, solves: SeedSolves | None=None) -> SeedReport:
-    solves = solves or SeedSolves(seed, world)
+def explain_seed(seed: int | str, world: World | None=None, database: Path | None=None, attribute: bool=True, heaviest: int=HEAVIEST, solves: SeedSolves | None=None, card: int | str | None=None) -> SeedReport:
+    solves = solves or SeedSolves(seed, world, card=card)
     seed_number, world, filename, profile = (solves.seed, solves.world, solves.filename, solves.profile)
     tier_squares = solves.tier_squares(attribute)
     heavy: list[HeavySquare] = []
@@ -191,16 +207,17 @@ def explain_seed(seed: int | str, world: World | None=None, database: Path | Non
     else:
         unrouted = list(profile.tiers['hard_glitches'].unreached_goal_names)
         if profile.access_tier == 'impossible':
-            causes = _impossible_causes(seed_number, world)
+            causes = _impossible_causes(seed_number, world, solves.board)
         elif profile.access_tier == 'trapped':
             pocket = _pocket(seed_number, world)
     stored = percentile = None
     if database is not None and Path(database).exists():
         from .scanner import SeedDatabase
-        stored = _compare_stored(SeedDatabase(Path(database)).lookup(seed_number), profile)
+        if solves.card == seed_number:
+            stored = _compare_stored(SeedDatabase(Path(database)).lookup(seed_number), profile)
         if profile.effort is not None:
             percentile = effort_percentile(Path(database), profile.effort)
-    return SeedReport(seed=seed_number, filename=filename, profile_version=PROFILE_VERSION, access_tier=profile.access_tier, access_tier_label=profile.access_tier_label, effort=profile.effort, effort_band=profile.effort_band, effort_percentile=percentile, tier_squares=tier_squares, attributed=attribute, heaviest=heavy, unrouted=unrouted, impossible_causes=causes, pocket=pocket, stored=stored, notes=[note for note in profile.notes if not note.startswith('tiers solved')])
+    return SeedReport(seed=seed_number, filename=filename, card_seed=solves.card, profile_version=PROFILE_VERSION, access_tier=profile.access_tier, access_tier_label=profile.access_tier_label, effort=profile.effort, effort_band=profile.effort_band, effort_percentile=percentile, tier_squares=tier_squares, attributed=attribute, heaviest=heavy, unrouted=unrouted, impossible_causes=causes, pocket=pocket, stored=stored, notes=[note for note in profile.notes if not note.startswith('tiers solved')])
 
 def opener_text(reason: SquareReason) -> str:
     tier = TIER_LABELS[reason.tier].lower()
@@ -216,6 +233,8 @@ def opener_text(reason: SquareReason) -> str:
 
 def format_report(report: SeedReport) -> str:
     lines = [f'Seed {report.seed} (filename {report.filename}), model {report.profile_version}']
+    if report.card_seed != report.seed:
+        lines.append(f"Card: BingoSync seed {report.card_seed}, scored on seed {report.seed}'s doors (not compared with the database, which stores each seed with its own card).")
     stored = report.stored
     if stored is not None:
         if not stored['found']:

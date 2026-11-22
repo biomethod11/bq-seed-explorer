@@ -23,7 +23,7 @@ def plain_factor(text: str) -> str:
 KEEP_SEEDS = 4
 MAX_TARGETS = 30
 _WORLD: World | None = None
-_SESSIONS: OrderedDict[int, 'SeedSession'] = OrderedDict()
+_SESSIONS: OrderedDict[tuple[int, int], 'SeedSession'] = OrderedDict()
 
 def use_board_source(board_for: Callable[[int], list[dict]]) -> None:
 
@@ -47,8 +47,8 @@ def _world() -> World:
 
 class SeedSession:
 
-    def __init__(self, seed: int) -> None:
-        self.solves = SeedSolves(seed, _world())
+    def __init__(self, seed: int, card: int | None=None) -> None:
+        self.solves = SeedSolves(seed, _world(), card=card)
         self._routers: dict[str, SeedRouter] = {}
 
     @property
@@ -75,35 +75,36 @@ class SeedSession:
             return {}
         return {reason.square: opener_text(reason) for reasons in attributed.values() for reason in reasons}
 
-def session(seed: int | str) -> SeedSession:
+def session(seed: int | str, card: int | str | None=None) -> SeedSession:
     number = canonical_seed(seed)
-    if number in _SESSIONS:
-        _SESSIONS.move_to_end(number)
+    key = (number, number if card is None else canonical_seed(card))
+    if key in _SESSIONS:
+        _SESSIONS.move_to_end(key)
     else:
-        _SESSIONS[number] = SeedSession(number)
+        _SESSIONS[key] = SeedSession(*key)
         while len(_SESSIONS) > KEEP_SEEDS:
             _SESSIONS.popitem(last=False)
-    return _SESSIONS[number]
+    return _SESSIONS[key]
 
 def _square_summary(state: SeedSession, index: int, goal, estimate, openers: dict[str, str]) -> dict[str, Any]:
     lowest = state.lowest_tier(goal.name)
     return {'index': index, 'name': goal.name, 'lowest_tier': lowest, 'lowest_tier_label': TIER_LABELS[lowest] if lowest else 'No route found', 'difficulty': round(estimate.difficulty_score, 1) if goal.cost is not None else None, 'cost': None if goal.cost is None else round(goal.cost, 1), 'after_sky_chest': goal.after_sky_chest, 'opened_by': openers.get(goal.name)}
 
-def overview(seed: int | str, attribute: bool=False) -> dict[str, Any]:
-    state = session(seed)
+def overview(seed: int | str, attribute: bool=False, card: int | str | None=None) -> dict[str, Any]:
+    state = session(seed, card)
     report = explain_seed(state.solves.seed, attribute=attribute, solves=state.solves)
     scored = state.solves.analysis(state.score_tier())
     openers = state.openers()
     start = state.router('glitchless').seed_world
-    return {'seed': report.seed, 'filename': report.filename, 'profile_version': PROFILE_VERSION, 'report': report.to_dict(), 'effort_bands': list(load_effort_bands()), 'scored_at': state.score_tier(), 'start': {age: display_name(start.start_region(age) or '?', with_raw=False) for age in ('child', 'adult')}, 'squares': [_square_summary(state, index, goal, estimate, openers) for index, (goal, estimate) in enumerate(zip(scored.score.goals, scored.goal_difficulty))]}
+    return {'seed': report.seed, 'filename': report.filename, 'card_seed': report.card_seed, 'profile_version': PROFILE_VERSION, 'report': report.to_dict(), 'effort_bands': list(load_effort_bands()), 'scored_at': state.score_tier(), 'start': {age: display_name(start.start_region(age) or '?', with_raw=False) for age in ('child', 'adult')}, 'squares': [_square_summary(state, index, goal, estimate, openers) for index, (goal, estimate) in enumerate(zip(scored.score.goals, scored.goal_difficulty))]}
 
 def _route_payload(router: SeedRouter, route: dict | None) -> dict[str, Any] | None:
     if route is None:
         return None
     return {'age': route['age'], 'loading_zones': route['count'], 'level': route['level'], 'level_note': LEVEL_NOTES[route['level']], 'without_target': route.get('without_target', True), 'ends_in': display_name(route['region'], with_raw=False), 'steps': describe_steps(router, route['steps'])}
 
-def square(seed: int | str, index: int) -> dict[str, Any]:
-    state = session(seed)
+def square(seed: int | str, index: int, card: int | str | None=None) -> dict[str, Any]:
+    state = session(seed, card)
     scored = state.solves.analysis(state.score_tier())
     goal, estimate = (scored.score.goals[index], scored.goal_difficulty[index])
     summary = _square_summary(state, index, goal, estimate, state.openers())
@@ -116,4 +117,4 @@ def square(seed: int | str, index: int) -> dict[str, Any]:
     for target in targets[:MAX_TARGETS]:
         found = router.route_to(start, target) if start and target.places else None
         routes.append({'target': target.label, 'route': _route_payload(router, found)})
-    return {**summary, 'seed': state.solves.seed, 'kind': goal.requirement_kind, 'note': goal.note, 'factors': [plain_factor(factor) for factor in estimate.factors], 'confidence': estimate.confidence_label, 'scored_at': state.score_tier(), 'route_tier': route_tier, 'route_tier_label': TIER_LABELS[route_tier], 'start': display_name(start, with_raw=False) if start else None, 'places_needed': len(targets), 'routes_shown': len(routes), 'routes': routes}
+    return {**summary, 'seed': state.solves.seed, 'card_seed': state.solves.card, 'kind': goal.requirement_kind, 'note': goal.note, 'factors': [plain_factor(factor) for factor in estimate.factors], 'confidence': estimate.confidence_label, 'scored_at': state.score_tier(), 'route_tier': route_tier, 'route_tier_label': TIER_LABELS[route_tier], 'start': display_name(start, with_raw=False) if start else None, 'places_needed': len(targets), 'routes_shown': len(routes), 'routes': routes}

@@ -3,6 +3,8 @@
 // A lookup shows the board first (the quick overview), then asks again with the glitch
 // behind each square named, which takes a few seconds more. A square's details are one
 // more call. The address keeps the seed and square (#274451/3), so a view can be shared.
+// A race whose card comes from another BingoSync seed adds it (#123456/card/654321/3):
+// the doors and routes are the first seed's, the 25 squares the card's.
 
 // Square difficulty fifths over 5,000 reachable squares of 200 random seeds at the hard
 // tier (2026-11-19): a square below 14.9 is in the lightest fifth, 35.0 and over in the
@@ -16,6 +18,23 @@ const $ = (id) => document.getElementById(id);
 const statusLine = $("status");
 const form = $("seed-form");
 const input = $("seed-input");
+const cardInput = $("card-input");
+const splitBox = $("split-card");
+
+// The checkbox splits the one seed box into a Beta Quest filename seed and a BingoSync seed.
+function showSplit(split) {
+  splitBox.checked = split;
+  $("card-field").hidden = !split;
+  cardInput.required = split;
+  $("seed-label").textContent = split ? "BQ Filename Seed" : "Seed";
+}
+splitBox.addEventListener("change", () => {
+  showSplit(splitBox.checked);
+  if (splitBox.checked) {
+    if (!cardInput.value) cardInput.value = input.value;
+    cardInput.focus();
+  }
+});
 
 function h(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);
@@ -120,24 +139,32 @@ function plural(count, one, many = `${one}s`) {
 }
 
 // ---------------------------------------------------------------- state
-const state = { seed: null, overview: null, attributed: false, selected: null, token: 0 };
+const state = { seed: null, card: null, overview: null, attributed: false, selected: null, token: 0 };
 
-function setAddress() {
-  const square = state.selected === null ? "" : `/${state.selected}`;
-  history.replaceState(null, "", `#${state.seed}${square}`);
+function address(seed, card, square) {
+  return `#${seed}${card === null ? "" : `/card/${card}`}${square === null ? "" : `/${square}`}`;
 }
 
-async function lookUp(seed, square = null) {
+function setAddress() {
+  history.replaceState(null, "", address(state.seed, state.card, state.selected));
+}
+
+// `card` is another BingoSync seed's card, or null for the seed's own.
+async function lookUp(seed, square = null, card = null) {
+  if (card === seed) card = null;
   const token = ++state.token;
-  Object.assign(state, { seed, overview: null, attributed: false, selected: square });
+  Object.assign(state, { seed, card, overview: null, attributed: false, selected: square });
   setAddress();
   input.value = String(seed);
-  document.title = `Seed ${seed} · Beta Quest Seed Explorer`;
-  setStatus(`Analyzing seed ${seed}…`, true);
+  cardInput.value = card === null ? "" : String(card);
+  if (card !== null) showSplit(true);
+  const named = card === null ? `seed ${seed}` : `seed ${seed} with card ${card}`;
+  document.title = `${card === null ? `Seed ${seed}` : `Seed ${seed} · card ${card}`} · Beta Quest Seed Explorer`;
+  setStatus(`Analyzing ${named}…`, true);
   form.querySelector("button[type=submit]").disabled = true;
   try {
     await buildReady;
-    const quick = await call("overview", { seed, attribute: false });
+    const quick = await call("overview", { seed, card, attribute: false });
     if (token !== state.token) return;
     state.overview = quick;
     $("intro").hidden = true;
@@ -148,7 +175,7 @@ async function lookUp(seed, square = null) {
     else setStatus("");
     if (state.selected !== null) showSquare(state.selected);
     if (glitchy) {
-      const full = await call("overview", { seed, attribute: true });
+      const full = await call("overview", { seed, card, attribute: true });
       if (token !== state.token) return;
       state.overview = full;
       state.attributed = true;
@@ -184,8 +211,11 @@ function renderSummary() {
         ? "an estimate, not a time"
         : `more work than ${Math.min(share * 100, 99.9).toFixed(share < 0.01 || share > 0.99 ? 1 : 0)}% of seeds that can be finished; an estimate, not a time`));
   const facts = h("dl", { class: "facts" },
-    h("div", {}, h("dt", {}, "Seed"), h("dd", {}, String(page.seed),
-      h("small", {}, `file name ${page.filename}`))),
+    h("div", {}, h("dt", {}, page.card_seed === page.seed ? "Seed" : "BQ Filename Seed"),
+      h("dd", {}, String(page.seed), h("small", {}, `file name ${page.filename}`))),
+    page.card_seed === page.seed ? null
+      : h("div", {}, h("dt", {}, "BingoSync Seed"), h("dd", {}, String(page.card_seed),
+        h("small", {}, `its card, on filename seed ${page.seed}'s doors`))),
     h("div", {}, h("dt", {}, "Glitches needed"), h("dd", {}, report.access_tier_label)),
     h("div", {}, h("dt", {}, "Workload"), workload),
     h("div", {}, h("dt", {}, "A new file starts in"), h("dd", {}, page.start.child,
@@ -303,7 +333,7 @@ async function showSquare(index, tapped = false) {
   );
   const token = state.token;
   try {
-    const square = await call("square", { seed: state.seed, index });
+    const square = await call("square", { seed: state.seed, card: state.card, index });
     if (token !== state.token || state.selected !== index) return;
     renderDetail(square);
   } catch (error) {
@@ -396,14 +426,18 @@ function stepNode(step) {
 }
 
 // ---------------------------------------------------------------- wiring
+const validSeed = (seed) => Number.isInteger(seed) && seed >= 1 && seed <= 999999;
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const seed = Number(input.value.trim());
-  if (!Number.isInteger(seed) || seed < 1 || seed > 999999) {
+  const cardText = cardInput.value.trim();
+  const card = !splitBox.checked || cardText === "" ? null : Number(cardText);
+  if (!validSeed(seed) || (card !== null && !validSeed(card))) {
     setStatus("A seed is a whole number from 1 to 999999.", false, true);
     return;
   }
-  lookUp(seed);
+  lookUp(seed, null, card);
 });
 $("random-seed").addEventListener("click", () => lookUp(1 + Math.floor(Math.random() * 999999)));
 for (const button of document.querySelectorAll("[data-seed]")) {
@@ -411,17 +445,22 @@ for (const button of document.querySelectorAll("[data-seed]")) {
 }
 
 function fromAddress() {
-  const match = /^#(\d{1,6})(?:\/(\d{1,2}))?$/.exec(location.hash);
+  const match = /^#(\d{1,6})(?:\/card\/(\d{1,6}))?(?:\/(\d{1,2}))?$/.exec(location.hash);
   if (!match) return false;
   const seed = Number(match[1]);
-  const square = match[2] === undefined ? null : Number(match[2]);
-  if (seed < 1 || seed > 999999 || (square !== null && square > 24)) return false;
-  lookUp(seed, square);
+  const card = match[2] === undefined ? null : Number(match[2]);
+  const square = match[3] === undefined ? null : Number(match[3]);
+  if (!validSeed(seed) || (card !== null && !validSeed(card)) || (square !== null && square > 24)) return false;
+  lookUp(seed, square, card);
   return true;
 }
 renderFooter();
 if (!fromAddress()) input.focus();
 window.addEventListener("hashchange", () => {
-  const match = /^#(\d{1,6})/.exec(location.hash);
-  if (match && Number(match[1]) !== state.seed) fromAddress();
+  // Only a new seed or card looks up again.
+  const match = /^#(\d{1,6})(?:\/card\/(\d{1,6}))?/.exec(location.hash);
+  if (!match) return;
+  const seed = Number(match[1]);
+  const card = match[2] === undefined || Number(match[2]) === seed ? null : Number(match[2]);
+  if (seed !== state.seed || card !== state.card) fromAddress();
 });
